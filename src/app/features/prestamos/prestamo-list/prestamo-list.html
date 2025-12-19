@@ -10,6 +10,7 @@
             <th>Usuario</th>
             <th>Libro</th>
             <th>Fecha Solicitud</th>
+            <th>Stock</th>
             <th>Estado</th>
             <th class="text-end">Acciones</th>
           </tr>
@@ -24,10 +25,20 @@
             <td>
               <span
                 class="badge"
+                [ngClass]="p.libro.stock > 0 ? 'bg-success' : 'bg-danger'"
+              >
+                {{ p.libro.stock }}
+              </span>
+            </td>
+
+            <td>
+              <span
+                class="badge"
                 [ngClass]="{
                   'bg-warning text-dark': p.estado === 'PENDIENTE',
                   'bg-success': p.estado === 'APROBADO',
-                  'bg-danger': p.estado === 'RECHAZADO'
+                  'bg-danger': p.estado === 'RECHAZADO',
+                  'bg-info text-dark': p.estado === 'FINALIZADO'
                 }"
               >
                 {{ p.estado }}
@@ -38,6 +49,7 @@
               <div *ngIf="p.estado === 'PENDIENTE'">
                 <button
                   class="btn btn-success btn-sm me-2"
+                  [disabled]="p.libro.stock === 0"
                   (click)="aprobar(p.id)"
                 >
                   ✅ Aprobar
@@ -46,7 +58,20 @@
                   ❌ Rechazar
                 </button>
               </div>
-              <span *ngIf="p.estado !== 'PENDIENTE'" class="text-muted small">
+
+              <div *ngIf="p.estado === 'APROBADO'">
+                <button
+                  class="btn btn-primary btn-sm"
+                  (click)="finalizar(p.id)"
+                >
+                  📦 Finalizar
+                </button>
+              </div>
+
+              <span
+                *ngIf="p.estado === 'RECHAZADO' || p.estado === 'FINALIZADO'"
+                class="text-muted small"
+              >
                 Sin acciones
               </span>
             </td>

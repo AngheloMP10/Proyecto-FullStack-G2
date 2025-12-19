@@ -81,4 +81,28 @@ export class PrestamoListComponent implements OnInit {
       });
     }
   }
+
+  // Finalizar / devolver préstamo
+  async finalizar(id: number) {
+    const confirmado = await this.alertService.confirmRequest(
+      '¿Finalizar préstamo?',
+      'El libro será devuelto y el stock se recuperará.'
+    );
+
+    if (confirmado) {
+      this.prestamoService.finalizar(id).subscribe({
+        next: () => {
+          this.alertService.success(
+            'Préstamo finalizado',
+            'El libro fue devuelto correctamente'
+          );
+          this.cargarPrestamos();
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Error', 'No se pudo finalizar el préstamo');
+        },
+      });
+    }
+  }
 }

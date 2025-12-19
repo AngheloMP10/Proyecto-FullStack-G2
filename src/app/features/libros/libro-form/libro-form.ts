@@ -48,7 +48,8 @@ export class LibroFormComponent implements OnInit {
     titulo: '',
     portada: '',
     anioPublicacion: new Date().getFullYear(),
-    disponible: true,
+    stock: 0,
+    disponible: false,
     genero: { id: 0, nombre: '' },
     autores: [],
   };

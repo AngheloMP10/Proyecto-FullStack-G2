@@ -51,14 +51,15 @@
 
         <div class="card-body">
           <div class="mb-2">
-            <span class="badge bg-info text-dark">
+            <span class="badge bg-info text-dark me-1">
               {{ libro.genero?.nombre || 'General' }}
             </span>
+
             <span
-              class="badge ms-2"
-              [ngClass]="libro.disponible ? 'bg-success' : 'bg-danger'"
+              class="badge"
+              [ngClass]="libro.stock > 0 ? 'bg-success' : 'bg-danger'"
             >
-              {{ libro.disponible ? 'Disponible' : 'Agotado' }}
+              {{ libro.stock > 0 ? libro.stock + ' Disponibles' : 'Agotado' }}
             </span>
           </div>
 
@@ -81,10 +82,10 @@
         <div class="card-footer bg-white border-0 pb-3">
           <button
             class="btn btn-outline-primary w-100"
-            [disabled]="!libro.disponible"
+            [disabled]="libro.stock === 0"
             (click)="solicitarPrestamo(libro)"
           >
-            {{ libro.disponible ? 'Solicitar Préstamo' : 'No Disponible' }}
+            {{ libro.stock > 0 ? 'Solicitar Préstamo' : 'Sin Stock' }}
           </button>
         </div>
       </div>

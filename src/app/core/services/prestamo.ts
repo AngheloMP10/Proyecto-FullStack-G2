@@ -51,4 +51,13 @@ export class PrestamoService {
       { responseType: 'text' }
     );
   }
+
+  // Finaliza (devuelve) un préstamo por ID
+  finalizar(id: number): Observable<any> {
+    return this.http.post(
+      `${this.apiUrl}/finalizar/${id}`,
+      {},
+      { responseType: 'text' }
+    );
+  }
 }

@@ -15,6 +15,7 @@
             <th>Año</th>
             <th>Autores</th>
             <th>Género</th>
+            <th>Stock</th>
             <th>Estado</th>
             <th class="text-end">Acciones</th>
           </tr>
@@ -59,9 +60,18 @@
             <td>
               <span
                 class="badge"
-                [ngClass]="libro.disponible ? 'bg-success' : 'bg-danger'"
+                [ngClass]="libro.stock > 0 ? 'bg-success' : 'bg-danger'"
               >
-                {{ libro.disponible ? 'Disponible' : 'Agotado' }}
+                {{ libro.stock }}
+              </span>
+            </td>
+
+            <td>
+              <span
+                class="badge"
+                [ngClass]="libro.stock > 0 ? 'bg-success' : 'bg-danger'"
+              >
+                {{ libro.stock > 0 ? 'Disponible' : 'Agotado' }}
               </span>
             </td>
 

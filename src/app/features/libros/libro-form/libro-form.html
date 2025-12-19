@@ -33,16 +33,17 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label for="disponible" class="form-label">Estado</label>
-                <select
-                  class="form-select"
-                  id="disponible"
-                  [(ngModel)]="libro.disponible"
-                  name="disponible"
-                >
-                  <option [ngValue]="true">Disponible</option>
-                  <option [ngValue]="false">Agotado</option>
-                </select>
+                <label for="stock" class="form-label">Stock (Cantidad)</label>
+                <input
+                  type="number"
+                  id="stock"
+                  class="form-control"
+                  [(ngModel)]="libro.stock"
+                  name="stock"
+                  placeholder="Ej: 10"
+                  min="0"
+                  required
+                />
               </div>
             </div>
 

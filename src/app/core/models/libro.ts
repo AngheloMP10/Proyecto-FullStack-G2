@@ -6,6 +6,7 @@ export interface Libro {
   titulo: string;
   portada?: string;
   anioPublicacion?: number;
+  stock: number;
   disponible: boolean;
 
   // Relaciones

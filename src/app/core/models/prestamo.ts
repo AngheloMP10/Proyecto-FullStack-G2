@@ -1,10 +1,16 @@
 import { Libro } from './libro';
 
+export type EstadoPrestamo =
+  | 'PENDIENTE'
+  | 'APROBADO'
+  | 'RECHAZADO'
+  | 'FINALIZADO';
+
 export interface Prestamo {
   id: number;
   fechaSolicitud: string;
   fechaDevolucion?: string;
-  estado: 'PENDIENTE' | 'APROBADO' | 'RECHAZADO';
+  estado: EstadoPrestamo;
   libro: Libro;
-  usuario: any; // Usuario completo desde Spring Boot
+  usuario: any;
 }
