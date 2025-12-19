@@ -28,6 +28,10 @@ export class AutorFormComponent implements OnInit {
 
   isEditing: boolean = false;
 
+  // Imagen seleccionada
+  selectedFile: File | null = null;
+  imagenPrevisualizacion: string | ArrayBuffer | null = null;
+
   ngOnInit(): void {
     // Verifica si la URL tiene un ID
     const id = this.route.snapshot.paramMap.get('id');
@@ -58,18 +62,8 @@ export class AutorFormComponent implements OnInit {
     });
   }
 
-  onSubmit(): void {
-    // Validación
-    if (!this.autor.nombre.trim()) {
-      this.alertService.error(
-        'Formulario inválido',
-        'El nombre del autor es obligatorio'
-      );
-      return;
-    }
-
+  guardarAutor(): void {
     if (this.isEditing) {
-      // Edita
       this.autorService.update(this.autor.id, this.autor).subscribe({
         next: () => {
           this.alertService.success(
@@ -84,7 +78,6 @@ export class AutorFormComponent implements OnInit {
         },
       });
     } else {
-      // Crea
       const autorParaGuardar = {
         nombre: this.autor.nombre,
         urlFoto: this.autor.urlFoto,
@@ -103,6 +96,48 @@ export class AutorFormComponent implements OnInit {
           );
         },
       });
+    }
+  }
+
+  onSubmit(): void {
+    // Validación
+    if (!this.autor.nombre.trim()) {
+      this.alertService.error(
+        'Formulario inválido',
+        'El nombre del autor es obligatorio'
+      );
+      return;
+    }
+
+    // Hay imagen nueva
+    if (this.selectedFile) {
+      this.autorService.uploadImage(this.selectedFile).subscribe({
+        next: (resp) => {
+          // Backend devuelve { url: 'https://cloudinary...' }
+          this.autor.urlFoto = resp.url;
+          this.guardarAutor();
+        },
+        error: (err) => {
+          console.error(err);
+          this.alertService.error('Error', 'Falló la subida de la imagen');
+        },
+      });
+    } else {
+      // No hay imagen nueva
+      this.guardarAutor();
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const file: File = event.target.files[0];
+    if (file) {
+      this.selectedFile = file;
+
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagenPrevisualizacion = reader.result;
+      };
+      reader.readAsDataURL(file);
     }
   }
 }

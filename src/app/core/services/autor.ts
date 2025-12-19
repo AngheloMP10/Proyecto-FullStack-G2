@@ -39,4 +39,12 @@ export class AutorService {
   update(id: number, autor: Autor): Observable<Autor> {
     return this.http.put<Autor>(`${this.apiUrl}/${id}`, autor);
   }
+
+  // Subir imagen del autor (MediaController)
+  uploadImage(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`${environment.apiUrl}/media/upload`, formData);
+  }
 }
