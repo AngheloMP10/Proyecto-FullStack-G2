@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard';
 import { publicGuard } from './core/guards/public-guard';
 import { adminGuard } from './core/guards/admin-guard';
+import { staffGuard } from './core/guards/staff-guard';
 
 //Landing
 import { LandingComponent } from './features/landing/landing';
@@ -18,6 +19,7 @@ import { AutorFormComponent } from './features/autores/autor-form/autor-form';
 import { GeneroListComponent } from './features/generos/genero-list/genero-list';
 import { GeneroFormComponent } from './features/generos/genero-form/genero-form';
 import { PrestamoListComponent } from './features/prestamos/prestamo-list/prestamo-list';
+import { MisPedidosComponent } from './features/prestamos/mis-pedidos/mis-pedidos';
 
 export const routes: Routes = [
   // Landing como raíz
@@ -45,17 +47,17 @@ export const routes: Routes = [
   {
     path: 'libros',
     component: LibroListComponent,
-    canActivate: [authGuard, adminGuard],
+    canActivate: [authGuard, staffGuard],
   },
   {
     path: 'libros/nuevo',
     component: LibroFormComponent,
-    canActivate: [authGuard, adminGuard],
+    canActivate: [authGuard, staffGuard],
   },
   {
     path: 'libros/editar/:id',
     component: LibroFormComponent,
-    canActivate: [authGuard, adminGuard],
+    canActivate: [authGuard, staffGuard],
   },
 
   // Autores
@@ -96,7 +98,13 @@ export const routes: Routes = [
   {
     path: 'prestamos',
     component: PrestamoListComponent,
-    canActivate: [authGuard, adminGuard],
+    canActivate: [authGuard, staffGuard],
+  },
+
+  {
+    path: 'mis-pedidos',
+    component: MisPedidosComponent,
+    canActivate: [authGuard],
   },
 
   // ERROR 404

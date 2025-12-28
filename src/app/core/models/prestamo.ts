@@ -4,6 +4,7 @@ export type EstadoPrestamo =
   | 'PENDIENTE'
   | 'APROBADO'
   | 'RECHAZADO'
+  | 'EN_PRESTAMO'
   | 'FINALIZADO';
 
 export interface Prestamo {

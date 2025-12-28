@@ -3,7 +3,7 @@
   *ngIf="isLoggedIn"
 >
   <div class="container">
-    <a class="navbar-brand" [routerLink]="isAdmin ? '/libros' : '/catalogo'">
+    <a class="navbar-brand" [routerLink]="isStaff ? '/libros' : '/catalogo'">
       📚 BiblioVirtual
     </a>
 
@@ -18,23 +18,11 @@
 
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav me-auto">
-        <!-- ADMIN -->
-        <ng-container *ngIf="isAdmin">
+        <!-- STAFF: ADMIN + BIBLIOTECARIO -->
+        <ng-container *ngIf="isStaff">
           <li class="nav-item">
             <a class="nav-link" routerLink="/libros" routerLinkActive="active">
               📚 Libros
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/autores" routerLinkActive="active">
-              ✍️ Autores
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a class="nav-link" routerLink="/generos" routerLinkActive="active">
-              🎭 Géneros
             </a>
           </li>
 
@@ -47,6 +35,29 @@
               🛎️ Solicitudes
             </a>
           </li>
+
+          <!-- SOLO ADMIN -->
+          <ng-container *ngIf="isAdmin">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/autores"
+                routerLinkActive="active"
+              >
+                ✍️ Autores
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                routerLink="/generos"
+                routerLinkActive="active"
+              >
+                🎭 Géneros
+              </a>
+            </li>
+          </ng-container>
 
           <li class="nav-item ms-lg-3 border-start ps-lg-3">
             <a
@@ -67,6 +78,7 @@
         </li>
       </ul>
 
+      <!-- USUARIO -->
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a

@@ -1,4 +1,25 @@
 <div class="container mt-4 mb-5">
+  <div
+    class="alert alert-info d-flex justify-content-between align-items-center shadow-sm"
+    *ngIf="isUser"
+  >
+    <div>
+      <strong>Hola, {{ usuarioNombre }}</strong>.
+      <span *ngIf="cuposDisponibles > 0">
+        Puedes solicitar
+        <span class="badge bg-primary fs-6">{{ cuposDisponibles }}</span>
+        libros más.
+      </span>
+      <span *ngIf="cuposDisponibles === 0" class="text-danger fw-bold">
+        🚫 Has alcanzado tu límite de préstamos.
+      </span>
+    </div>
+
+    <a routerLink="/mis-pedidos" class="btn btn-sm btn-outline-primary">
+      Ver Mis Pedidos
+    </a>
+  </div>
+
   <h2 class="mb-4 text-center">Catálogo de Libros</h2>
 
   <!-- Buscador -->
@@ -82,7 +103,7 @@
         <div class="card-footer bg-white border-0 pb-3">
           <button
             class="btn btn-outline-primary w-100"
-            [disabled]="libro.stock === 0"
+            [disabled]="libro.stock === 0 || cuposDisponibles === 0"
             (click)="solicitarPrestamo(libro)"
           >
             {{ libro.stock > 0 ? 'Solicitar Préstamo' : 'Sin Stock' }}
