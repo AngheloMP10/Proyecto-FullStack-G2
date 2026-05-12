@@ -26,7 +26,11 @@ export const routes: Routes = [
   { path: '', component: LandingComponent },
 
   // Login (Pública)
-  { path: 'auth/login', component: LoginComponent, canActivate: [publicGuard] },
+  {
+    path: 'auth/login',
+    component: LoginComponent,
+    canActivate: [publicGuard],
+  },
 
   // Registro
   {

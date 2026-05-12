@@ -16,7 +16,7 @@ import { TokenStorageService } from '../../core/services/token-storage.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './login.html',
-  styleUrls: ['./login.css'],
+  styleUrls: ['../auth.css'],
 })
 export class LoginComponent {
   mensajeError: string = '';

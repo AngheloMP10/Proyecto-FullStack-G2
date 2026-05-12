@@ -16,7 +16,7 @@ import { AuthService } from '../auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './registro.html',
-  styleUrls: ['./registro.css'],
+  styleUrls: ['../auth.css'],
 })
 export class RegistroComponent {
   registroForm: FormGroup;
@@ -25,10 +25,12 @@ export class RegistroComponent {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {
     this.registroForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
+      email: ['', [Validators.required, Validators.email]],
+      celular: ['', [Validators.required, Validators.minLength(9)]],
       password: ['', [Validators.required, Validators.minLength(4)]],
     });
   }
@@ -37,19 +39,24 @@ export class RegistroComponent {
     if (this.registroForm.invalid) {
       this.alertService.error(
         'Formulario inválido',
-        'Por favor completa el formulario correctamente.'
+        'Por favor completa el formulario correctamente.',
       );
       return;
     }
 
-    const { username, password } = this.registroForm.value;
-    const registroData = { username, password };
+    const { username, password, email, celular } = this.registroForm.value;
+    const registroData = {
+      username,
+      password,
+      email,
+      celular,
+    };
 
     this.authService.register(registroData).subscribe({
       next: () => {
         this.alertService.success(
           '¡Bienvenido!',
-          'Usuario creado con éxito. Ahora inicia sesión.'
+          'Usuario creado con éxito. Ahora inicia sesión.',
         );
 
         this.router.navigate(['/auth/login']);
@@ -59,7 +66,7 @@ export class RegistroComponent {
 
         this.alertService.error(
           'Error',
-          'No se pudo registrar. Es posible que el usuario ya exista.'
+          'No se pudo registrar. Es posible que el usuario ya exista.',
         );
       },
     });
