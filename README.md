@@ -14,8 +14,8 @@ Sistema web frontend para la gestión de una Biblioteca Virtual, desarrollado co
 
 ## Autores
 
-**Anghelo Mendoza Prado**
-**Fernando Alania Atoche**
+**Anghelo Mendoza Prado**, 
+**Fernando Alania Atoche**, 
 **Marcos Javier Vargas**
 
 ---
