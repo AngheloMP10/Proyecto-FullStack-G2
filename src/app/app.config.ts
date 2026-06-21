@@ -1,7 +1,9 @@
 import {
   ApplicationConfig,
+  APP_INITIALIZER,
   provideBrowserGlobalErrorListeners,
   provideZoneChangeDetection,
+  inject,
 } from '@angular/core';
 
 import { provideRouter } from '@angular/router';
@@ -18,6 +20,12 @@ import {
 } from '@angular/common/http';
 
 import { authInterceptor } from './core/interceptors/auth-interceptor';
+import { WebSocketService } from './core/services/websocket.service';
+
+const initializeWebSocket = () => {
+  const wsService = inject(WebSocketService);
+  wsService.connect();
+};
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,5 +38,12 @@ export const appConfig: ApplicationConfig = {
 
     // ng2-charts
     provideCharts(withDefaultRegisterables()),
+
+    // WebSocket initialization
+    {
+      provide: APP_INITIALIZER,
+      useFactory: () => initializeWebSocket,
+      multi: true,
+    },
   ],
 };
