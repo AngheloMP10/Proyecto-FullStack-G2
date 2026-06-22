@@ -22,7 +22,12 @@ export class DashboardComponent implements OnInit {
 
   loading = true;
 
-  metricas!: DashboardMetricas;
+  metricas: DashboardMetricas = {
+    totalLibros: 0,
+    totalUsuarios: 0,
+    prestamosActivos: 0,
+    prestamosFinalizados: 0,
+  };
 
   fechaInicio = '';
   fechaFin = '';

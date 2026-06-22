@@ -2,7 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './shared/components/navbar/navbar';
 import { FooterComponent } from './shared/components/footer/footer';
-import { WebSocketService, NotificacionDTO } from './core/services/websocket.service';
+import {
+  WebSocketService,
+  NotificacionDTO,
+} from './core/services/websocket.service';
 import { AlertService } from './core/services/alert';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -19,7 +22,7 @@ export class App implements OnInit, OnDestroy {
 
   constructor(
     private websocketService: WebSocketService,
-    private alertService: AlertService
+    private alertService: AlertService,
   ) {}
 
   ngOnInit(): void {
@@ -50,7 +53,7 @@ export class App implements OnInit, OnDestroy {
         break;
 
       case 'PRESTAMO_CREADO':
-        this.alertService.infoToast(`ℹ️ ${mensaje}`);
+        this.alertService.infoToast(mensaje, 5000);
         break;
 
       case 'PRESTAMO_DEVUELTO':
