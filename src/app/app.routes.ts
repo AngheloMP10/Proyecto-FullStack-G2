@@ -10,6 +10,8 @@ import { LandingComponent } from './features/landing/landing';
 import { LoginComponent } from './auth/login/login';
 //Registro
 import { RegistroComponent } from './auth/registro/registro';
+//RUTA 2FA
+import { TwoFaComponent } from './features/security/two-fa/two-fa';
 // Componentes
 import { CatalogoComponent } from './features/catalogo/catalogo';
 import { LibroListComponent } from './features/libros/libro-list/libro-list';
@@ -40,6 +42,13 @@ export const routes: Routes = [
     path: 'auth/registro',
     component: RegistroComponent,
     canActivate: [publicGuard],
+  },
+
+  // 2FA
+  {
+    path: 'seguridad/2fa',
+    component: TwoFaComponent,
+    canActivate: [authGuard], // IMPORTANTE: solo usuarios logueados
   },
 
   // Ruta para usuarios

@@ -28,4 +28,18 @@ export class TokenStorageService {
   isLoggedIn(): boolean {
     return this.getToken() !== null;
   }
+
+  // Obtiene el tipo de token desde el JWT
+  getTokenType(): string | null {
+    const token = this.getToken();
+    if (!token) return null;
+
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.type || null;
+    } catch (error) {
+      console.error('Error decodificando token:', error);
+      return null;
+    }
+  }
 }

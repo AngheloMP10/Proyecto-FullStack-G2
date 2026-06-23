@@ -11,8 +11,11 @@
   <div class="auth-form-container">
     <div class="card auth-card shadow p-4 animate__animated animate__fadeInUp">
       <div class="card-body">
-        <h2 class="text-center mb-4">Iniciar Sesión</h2>
+        <h2 class="text-center mb-4">
+          {{ step === 'LOGIN' ? 'Iniciar Sesión' : 'Verificación 2FA' }}
+        </h2>
 
+        <!-- ERROR -->
         <div
           *ngIf="mensajeError"
           class="alert alert-danger text-center"
@@ -21,7 +24,12 @@
           {{ mensajeError }}
         </div>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <!-- LOGIN STEP -->
+        <form
+          *ngIf="step === 'LOGIN'"
+          [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+        >
           <!-- Usuario -->
           <div class="form-floating mb-4">
             <input
@@ -115,11 +123,51 @@
           </div>
         </form>
 
-        <div class="mt-3 text-center">
-          <small
-            >¿No tienes cuenta?
-            <a routerLink="/auth/registro">Regístrate aquí</a></small
-          >
+        <!-- OTP STEP -->
+        <div *ngIf="step === 'OTP'">
+          <p class="text-center mb-3">
+            Ingresa el código de 6 dígitos de tu aplicación autenticadora
+          </p>
+
+          <div class="form-floating mb-3">
+            <input
+              type="text"
+              class="form-control text-center"
+              [(ngModel)]="otpCode"
+              maxlength="6"
+              placeholder="Código OTP"
+            />
+
+            <label>Código OTP</label>
+          </div>
+
+          <div class="d-grid">
+            <button
+              class="btn btn-success"
+              (click)="onVerifyOtp()"
+              [disabled]="loading || !otpCode"
+            >
+              Verificar
+            </button>
+          </div>
+
+          <div class="mt-3 text-center">
+            <a
+              href="javascript:void(0)"
+              (click)="cancelOtp()"
+              class="text-decoration-none"
+            >
+              <small>← Volver al inicio de sesión</small>
+            </a>
+          </div>
+        </div>
+
+        <!-- REGISTRO -->
+        <div class="mt-3 text-center" *ngIf="step === 'LOGIN'">
+          <small>
+            ¿No tienes cuenta?
+            <a routerLink="/auth/registro">Regístrate aquí</a>
+          </small>
         </div>
       </div>
     </div>

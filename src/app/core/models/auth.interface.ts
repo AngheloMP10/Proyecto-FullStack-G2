@@ -4,8 +4,15 @@ export interface AuthRequest {
 }
 
 export interface AuthResponse {
-  token: string;
-  tipoToken: string;
-  username: string;
-  role: string;
+  token?: string;
+  tempToken?: string;
+  tipoToken?: string;
+  username?: string;
+  role?: string;
+  requires2FA: boolean;
+}
+
+export interface QrResponse {
+  secret: string;
+  qrUrl: string;
 }

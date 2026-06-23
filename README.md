@@ -60,47 +60,6 @@ http://localhost:4200
 
 # Estructura del proyecto
 
-```text
-biblioteca-front
-├── src
-│   ├── app
-│   │   ├── auth
-│   │   ├── core
-│   │   │   ├── guards
-│   │   │   ├── interceptors
-│   │   │   ├── models
-│   │   │   └── services
-│   │   ├── features
-│   │   │   ├── autores
-│   │   │   ├── catalogo
-│   │   │   ├── generos
-│   │   │   ├── landing
-│   │   │   ├── libros
-│   │   │   └── prestamos
-│   │   └── shared
-│   │       └── components
-│   ├── assets
-│   └── environments
-├── Dockerfile
-├── nginx.conf
-├── angular.json
-└── package.json
-```
-
----
-
-# Funcionalidades principales
-
-- Autenticación y registro de usuarios
-- Gestión de libros
-- Gestión de autores
-- Gestión de géneros
-- Gestión de préstamos
-- Guards de autenticación y roles
-- Consumo de API REST
-- Diseño responsive
-
-
 
 ```
 biblioteca-front
@@ -173,7 +132,8 @@ biblioteca-front
 │  │  │     ├─ prestamo.spec.ts
 │  │  │     ├─ prestamo.ts
 │  │  │     ├─ token-storage.service.ts
-│  │  │     └─ token-storage.spec.ts
+│  │  │     ├─ token-storage.spec.ts
+│  │  │     └─ websocket.service.ts
 │  │  ├─ features
 │  │  │  ├─ admin
 │  │  │  │  └─ dashboard
@@ -229,17 +189,23 @@ biblioteca-front
 │  │  │  │  ├─ not-found.html
 │  │  │  │  ├─ not-found.spec.ts
 │  │  │  │  └─ not-found.ts
-│  │  │  └─ prestamos
-│  │  │     ├─ mis-pedidos
-│  │  │     │  ├─ mis-pedidos.css
-│  │  │     │  ├─ mis-pedidos.html
-│  │  │     │  ├─ mis-pedidos.spec.ts
-│  │  │     │  └─ mis-pedidos.ts
-│  │  │     └─ prestamo-list
-│  │  │        ├─ prestamo-list.css
-│  │  │        ├─ prestamo-list.html
-│  │  │        ├─ prestamo-list.spec.ts
-│  │  │        └─ prestamo-list.ts
+│  │  │  ├─ prestamos
+│  │  │  │  ├─ mis-pedidos
+│  │  │  │  │  ├─ mis-pedidos.css
+│  │  │  │  │  ├─ mis-pedidos.html
+│  │  │  │  │  ├─ mis-pedidos.spec.ts
+│  │  │  │  │  └─ mis-pedidos.ts
+│  │  │  │  └─ prestamo-list
+│  │  │  │     ├─ prestamo-list.css
+│  │  │  │     ├─ prestamo-list.html
+│  │  │  │     ├─ prestamo-list.spec.ts
+│  │  │  │     └─ prestamo-list.ts
+│  │  │  └─ security
+│  │  │     └─ two-fa
+│  │  │        ├─ two-fa.css
+│  │  │        ├─ two-fa.html
+│  │  │        ├─ two-fa.spec.ts
+│  │  │        └─ two-fa.ts
 │  │  └─ shared
 │  │     └─ components
 │  │        ├─ footer

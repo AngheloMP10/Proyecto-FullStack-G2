@@ -1,0 +1,85 @@
+<div class="two-fa-container">
+  <div class="card auth-card shadow p-4">
+    <div class="card-body text-center">
+      <h2 class="mb-4 fw-bold">Seguridad 2FA</h2>
+
+      <div *ngIf="isLoading && !qrUrl" class="py-4">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+
+      <div
+        class="animate__animated animate__fadeIn"
+        *ngIf="!isLoading && is2faActive"
+      >
+        <div class="display-4 mb-3">🛡️</div>
+        <h5 class="text-success fw-bold">Cuenta Protegida</h5>
+        <p class="text-muted small mb-4">
+          Cada vez que inicies sesión se te solicitará un código OTP de tu
+          aplicación Google Authenticator.
+        </p>
+        <button
+          class="btn btn-danger w-100"
+          (click)="disable2FA()"
+          [disabled]="isLoading"
+        >
+          Desactivar 2FA
+        </button>
+      </div>
+
+      <div
+        class="animate__animated animate__fadeIn"
+        *ngIf="!isLoading && !is2faActive"
+      >
+        <button
+          *ngIf="!qrUrl"
+          class="btn btn-primary w-100"
+          (click)="generateQr()"
+          [disabled]="isLoading"
+        >
+          Activar Autenticación en 2 Pasos
+        </button>
+
+        <div *ngIf="qrUrl">
+          <p class="text-muted small mb-3">
+            📱 Escanea este código con Google Authenticator o tu app favorita.
+          </p>
+
+          <div class="qr-container mb-4">
+            <qrcode
+              [qrdata]="qrUrl"
+              [width]="200"
+              [errorCorrectionLevel]="'M'"
+            ></qrcode>
+          </div>
+
+          <div class="form-floating mb-3">
+            <input
+              id="otp-code"
+              type="text"
+              class="form-control otp-input"
+              [(ngModel)]="code"
+              placeholder="Ej: 123456"
+              maxlength="6"
+              [disabled]="isLoading"
+            />
+            <label for="otp-code">Código de 6 dígitos</label>
+          </div>
+
+          <button
+            class="btn btn-primary w-100"
+            (click)="confirm()"
+            [disabled]="isLoading || !code.trim()"
+          >
+            <span
+              *ngIf="isLoading"
+              class="spinner-border spinner-border-sm me-2"
+            ></span>
+            {{ isLoading ? 'Verificando...' : 'Confirmar y Activar' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
