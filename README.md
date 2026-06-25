@@ -1,6 +1,16 @@
-# Biblioteca Virtual Frontend
+# Biblioteca Virtual - Frontend
 
-Sistema web frontend para la gestión de una Biblioteca Virtual, desarrollado con Angular.
+Frontend del sistema **Biblioteca Virtual**, una aplicación web desarrollada con Angular para la gestión de préstamos bibliotecarios, consulta de catálogo y administración del sistema según roles de usuario.
+
+La interfaz permite a los usuarios consultar libros, solicitar préstamos y gestionar su cuenta, mientras que bibliotecarios y administradores acceden a módulos de gestión y control operativo.
+
+---
+
+## Autor
+
+**Anghelo M. P.**
+Estudiante de Ingeniería de Software
+Universidad Tecnológica del Perú
 
 ---
 
@@ -8,45 +18,73 @@ Sistema web frontend para la gestión de una Biblioteca Virtual, desarrollado co
 
 - Angular 20
 - TypeScript
+- Bootstrap
 - Nginx
+- Docker
 
 ---
 
-## Autores
+## Funcionalidades principales
 
-**Anghelo Mendoza Prado**, 
-**Fernando Alania Atoche**, 
-**Marcos Javier Vargas**
+- Landing page informativa
+- Registro e inicio de sesión
+- Autenticación con JWT
+- Verificación en dos pasos (2FA)
+- Catálogo de libros con buscador
+- Solicitud y seguimiento de préstamos
+- Gestión administrativa por roles
+- Dashboard con métricas
+
+---
+
+## Roles soportados
+
+El sistema cuenta con tres roles principales:
+
+- **USER** → Consulta catálogo y solicita préstamos
+- **BIBLIOTECARIO** → Gestiona libros y préstamos
+- **ADMIN** → Acceso total, dashboard y administración general
 
 ---
 
 ## Requisitos
 
-Antes de iniciar, asegúrate de tener instalado:
+Para ejecutar el proyecto puedes usar una de estas opciones:
+
+### Opción 1: Docker (recomendado)
 
 - Docker
+- Docker Compose
 
-> No es necesario instalar Node.js ni Angular CLI localmente para ejecutar el proyecto en contenedores.
+### Opción 2: Desarrollo local
+
+- Node.js
+- Angular CLI
 
 ---
 
-# Instalación y ejecución
+## Instalación y ejecución
 
-## Clonar el repositorio
+Clonar el repositorio:
 
 ```bash
-git clone https://github.com/AngheloMP10/Proyecto-FullStack-G2.git
+git clone https://github.com/AngheloMP10/biblioteca-virtual-frontend.git
 cd Proyecto-FullStack-G2
 ```
 
 ---
 
-## Ejecución en desarrollo (Angular CLI)
+## Ejecución en desarrollo
 
-Si deseas trabajar en modo desarrollo:
+Instalar dependencias:
 
 ```bash
 npm install
+```
+
+Iniciar Angular:
+
+```bash
 ng serve
 ```
 
@@ -58,8 +96,23 @@ http://localhost:4200
 
 ---
 
-# Estructura del proyecto
+## Ejecución con Docker
 
+```bash
+docker build -t biblioteca-front .
+docker run -p 4200:80 biblioteca-front
+```
+
+---
+
+## Estado del proyecto
+
+Proyecto en desarrollo activo.
+La aplicación continuará evolucionando con nuevas funcionalidades, mejoras de experiencia de usuario y optimizaciones de rendimiento.
+
+---
+
+# Estructura del proyecto
 
 ```
 biblioteca-front
